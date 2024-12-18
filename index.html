@@ -10,7 +10,14 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Overpass+Mono:wght@300..700&family=Playwrite+CO+Guides&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
     <style>
+      html {
+        font-size: 30px;
+      }
       body {
         display: flex;
         justify-content: center;
@@ -18,7 +25,7 @@
         height: 100vh;
         margin: 0;
         background-color: black;
-        color: #333;
+        color: white;
         padding: 0 5rem 0 5rem;
         overflow-y: hidden;
         font-family: "Tomorrow", sans-serif;
@@ -26,63 +33,145 @@
         font-style: normal;
       }
       #randomText {
-        font-size: 2rem;
-        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .proverb,
+      .source {
+        text-align: center;
+        background: linear-gradient(90deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient-animation 8s ease infinite; /* Slow animation */
+      }
+      .proverb {
+        font-size: 1.5rem;
+      }
+      .source {
+        font-size: 1rem;
+        margin-top: 2rem;
+      }
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      /* Media query for screens with width or height less than 500px */
+      @media screen and (max-width: 500px), screen and (max-height: 500px) {
+        html {
+          font-size: 15px; /* Adjust font size */
+        }
+      }
+
+      /* Media query for screens with width or height more than 1200px */
+      @media screen and (min-width: 1200px), screen and (min-height: 1200px) {
+        html {
+          font-size: 45px; /* Adjust font size */
+        }
       }
     </style>
   </head>
   <body>
-    <div id="randomText">Welcome!</div>
+    <div id="randomText"></div>
     <script>
       const proverbsArray = [
-        "Wisdom is like a baobab tree; no one individual can embrace it. 🌳 - African Proverb",
-        "The early bird catches the worm. 🐦 - English Proverb",
-        "A journey of a thousand miles begins with a single step. 👣 - Chinese Proverb",
-        "He who has health has hope, and he who has hope has everything. 💪 - Arabian Proverb",
-        "Better to light a candle than to curse the darkness. 🕯️ - Chinese Proverb",
-        "Don’t count your chickens before they hatch. 🐣 - English Proverb",
-        "The child who is not embraced by the village will burn it down to feel its warmth. 🔥 - African Proverb",
-        "If you want to go fast, go alone. If you want to go far, go together. 🤝 - African Proverb",
-        "A man who uses force is afraid of reasoning. 💥 - Kenyan Proverb",
-        "The one who asks questions doesn’t lose their way. ❓ - Native American Proverb",
+        `<div class="proverb">🌳 A tree is known by its fruit. 🌳</div><div class="source">Southern African Proverb</div>`,
+        `<div class="proverb">🐎 The old horse in the stable still yearns to run. 🐎</div><div class="source">Asian Proverb</div>`,
+        `<div class="proverb">🎣 Give a man a fish and you feed him for a day; teach a man to fish and you feed him for a lifetime. 🎣</div><div class="source">Asian Proverb</div>`,
+        `<div class="proverb">🐒 A monkey in silk is a monkey no less. 🐒</div><div class="source">American Proverb</div>`,
+        `<div class="proverb">⏰ Early to bed and early to rise, makes a man healthy, wealthy and wise. ⏰</div><div class="source">English Proverb</div>`,
+        `<div class="proverb">😂 Laugh and the world laughs with you, weep and you weep alone. 😢</div><div class="source">English Proverb</div>`,
+        `<div class="proverb">🦁 An army of sheep led by a lion would defeat an army of lions led by a sheep. 🐑</div><div class="source">Arabic Proverb</div>`,
+        `<div class="proverb">✨ Even a small star shines in the darkness. ✨</div><div class="source">Finnish Proverb</div>`,
+        `<div class="proverb">♟️ After the game, the king and pawn go into the same box. ♟️</div><div class="source">Italian Proverb</div>`,
+        `<div class="proverb">👩‍👧 God could not be everywhere and therefore he made mothers. 👩‍👧</div><div class="source">Jewish Proverb</div>`,
+        `<div class="proverb">😊 Shared joy is a double joy; shared sorrow is half a sorrow. 😢</div><div class="source">Swedish Proverb</div>`,
+        `<div class="proverb">⚖️ Words should be weighed, not counted. ⚖️</div><div class="source">Yiddish Proverb</div>`,
+        `<div class="proverb">🌊 Do good and throw it in the sea. 🌊</div><div class="source">Arabic Proverb</div>`,
+        `<div class="proverb">❤️ Where love reigns, the impossible may be attained. ❤️</div><div class="source">Indian Proverb</div>`,
+        `<div class="proverb">⏳ Truth is more valuable if it takes you a few years to find it. ⏳</div><div class="source">French Proverb</div>`,
+        `<div class="proverb">📘 There is no shame in not knowing; the shame lies in not finding out. 📘</div><div class="source">Russian Proverb</div>`,
+        `<div class="proverb">🦷 A loose tooth will not rest until it’s pulled out. 🦷</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">🚶 The path is made by walking. 🚶</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">💧 Drop by drop you break the rock. 💧</div><div class="source">Italian Proverb</div>`,
+        `<div class="proverb">🌲 The tree often hides the forest. 🌲</div><div class="source">French Proverb</div>`,
+        `<div class="proverb">🌊 Do not push the river, it will flow itself. 🌊</div><div class="source">Polish Proverb</div>`,
+        `<div class="proverb">📏 Measure a thousand times and cut once. 📏</div><div class="source">Turkish Proverb</div>`,
+        `<div class="proverb">🗣️ Whoever gossips to you will gossip about you. 🗣️</div><div class="source">Spanish Proverb</div>`,
+        `<div class="proverb">🚣 Don’t sail out farther than you can row back. 🚣</div><div class="source">Danish Proverb</div>`,
+        `<div class="proverb">👣 If you take big paces, you leave big spaces. 👣</div><div class="source">Burmese Proverb</div>`,
+        `<div class="proverb">⚽ Before you score, you first must have a goal. ⚽</div><div class="source">Greek Proverb</div>`,
+        `<div class="proverb">🛠️ Good advice is often annoying, bad advice never is. 🛠️</div><div class="source">French Proverb</div>`,
+        `<div class="proverb">✒️ Instruction in youth is like engraving in stone. ✒️</div><div class="source">Moroccan Proverb</div>`,
+        `<div class="proverb">🌺 A beautiful thing is never perfect. 🌺</div><div class="source">Egyptian Proverb</div>`,
+        `<div class="proverb">☀️ Turn your face toward the sun and the shadows fall behind you. ☀️</div><div class="source">Maori Proverb</div>`,
+        `<div class="proverb">🤏 Better little than too little. 🤏</div><div class="source">Cameroonian Proverb</div>`,
+        `<div class="proverb">👫 Tell me who your friends are, so I can tell you who you are. 👫</div><div class="source">Bulgarian Proverb</div>`,
+        `<div class="proverb">🐣 Don’t count your chickens before they’re hatched. 🐣</div><div class="source">Australian Proverb</div>`,
+        `<div class="proverb">💪 To be willing is only half the task. 💪</div><div class="source">Armenian Proverb</div>`,
+        `<div class="proverb">☀️ When the sun rises, it rises for everyone. ☀️</div><div class="source">Cuban Proverb</div>`,
+        `<div class="proverb">🛶 No man can paddle two canoes at the same time. 🛶</div><div class="source">Bantu Proverb</div>`,
+        `<div class="proverb">👴 Age is honorable and youth is noble. 👶</div><div class="source">Irish Proverb</div>`,
+        `<div class="proverb">🍃 The tree with most leaves will not necessarily produce juicy fruit. 🍃</div><div class="source">Brazilian Proverb</div>`,
+        `<div class="proverb">👩‍👦 A mother understands what a child does not say. 👩‍👦</div><div class="source">Yiddish Proverb</div>`,
+        `<div class="proverb">🛠️ A bad worker blames his tools. 🛠️</div><div class="source">Australian Proverb</div>`,
+        `<div class="proverb">🤝 If you want to go fast, go alone. If you want to go far, go together. 🤝</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">📈 Fall seven times, stand up eight. 📈</div><div class="source">Japanese Proverb</div>`,
 
-        "A bird does not change its feathers because the weather is bad. 🦅 - Jamaican Proverb",
-        "He who doesn’t know one thing knows another. 🤷‍♂️ - Spanish Proverb",
-        "A friend in need is a friend indeed. 👯‍♂️ - English Proverb",
-        "Don't let the sun go down on your anger. 🌅 - Hebrew Proverb",
-        "When there is no enemy within, the enemies outside cannot hurt you. 🛡️ - African Proverb",
-        "In the land of the blind, the one-eyed man is king. 👑 - Latin Proverb",
-        "A fool looks for happiness in the distance; the wise grows it under his feet. 🌱 - Chinese Proverb",
-        "To understand the heart and mind of a person, look not at what they have already achieved, but at what they aspire to. 🎯 - Nigerian Proverb",
-        "When the roots of a tree begin to decay, it spreads death to the branches. 🌳 - Nigerian Proverb",
-        "If you want to know the end, look at the beginning. 🔄 - Japanese Proverb",
-
-        "The grass is always greener on the other side of the fence. 🌱 - American Proverb",
-        "A well-fed mind is a better weapon than a well-fed stomach. 🧠 - Indian Proverb",
-        "Patience is a bitter plant, but it has sweet fruit. 🍇 - German Proverb",
-        "Do not look where you fell, but where you slipped. 🪴 - African Proverb",
-        "Rats don’t play in the cat’s door. 🐱 - Ghanaian Proverb",
-        "When the lion is not there, the antelope dances. 🦁 - Zulu Proverb",
-        "A single bracelet does not jingle. 🧣 - Congolese Proverb",
-        "You learn how to cut the grass by cutting it. 🌾 - Tanzanian Proverb",
-        "He who has a why to live can bear almost any how. 🧭 - German Proverb",
-        "Don’t put all your eggs in one basket. 🥚 - Spanish Proverb",
-
-        "The moon does not fight. It imposes itself. 🌕 - Chinese Proverb",
-        "An ounce of prevention is worth a pound of cure. ⚖️ - American Proverb",
-        "When the wolf is hungry, he doesn't care about the sheep’s religion. 🐺 - Arab Proverb",
-        "If you wish to be rich, do not save money, but save time. ⏳ - Chinese Proverb",
-        "You cannot hide a large tree under a small shrub. 🌲 - Indian Proverb",
-        "A broken heart is like a broken mirror. 💔 - Russian Proverb",
+        `<div class="proverb">🌳 Wisdom is like a baobab tree; no one individual can embrace it. 🌳</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">🐦 The early bird catches the worm. 🐦</div><div class="source">English Proverb</div>`,
+        `<div class="proverb">👣 A journey of a thousand miles begins with a single step. 👣</div><div class="source">Chinese Proverb</div>`,
+        `<div class="proverb">💪 He who has health has hope, and he who has hope has everything. 💪</div><div class="source">Arabian Proverb</div>`,
+        `<div class="proverb">🕯️ Better to light a candle than to curse the darkness. 🕯️</div><div class="source">Chinese Proverb</div>`,
+        `<div class="proverb">🐣 Don’t count your chickens before they hatch. 🐣</div><div class="source">English Proverb</div>`,
+        `<div class="proverb">🔥 The child who is not embraced by the village will burn it down to feel its warmth. 🔥</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">🤝 If you want to go fast, go alone. If you want to go far, go together. 🤝</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">💥 A man who uses force is afraid of reasoning. 💥</div><div class="source">Kenyan Proverb</div>`,
+        `<div class="proverb">❓ The one who asks questions doesn’t lose their way. ❓</div><div class="source">Native American Proverb</div>`,
+        `<div class="proverb">🦅 A bird does not change its feathers because the weather is bad. 🦅</div><div class="source">Jamaican Proverb</div>`,
+        `<div class="proverb">🤷‍♂️ He who doesn’t know one thing knows another. 🤷‍♂️</div><div class="source">Spanish Proverb</div>`,
+        `<div class="proverb">👯‍♂️ A friend in need is a friend indeed. 👯‍♂️</div><div class="source">English Proverb</div>`,
+        `<div class="proverb">🌅 Don't let the sun go down on your anger. 🌅</div><div class="source">Hebrew Proverb</div>`,
+        `<div class="proverb">🛡️ When there is no enemy within, the enemies outside cannot hurt you. 🛡️</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">👑 In the land of the blind, the one-eyed man is king. 👑</div><div class="source">Latin Proverb</div>`,
+        `<div class="proverb">🌱 A fool looks for happiness in the distance; the wise grows it under his feet. 🌱</div><div class="source">Chinese Proverb</div>`,
+        `<div class="proverb">🎯 To understand the heart and mind of a person, look not at what they have already achieved, but at what they aspire to. 🎯</div><div class="source">Nigerian Proverb</div>`,
+        `<div class="proverb">🌳 When the roots of a tree begin to decay, it spreads death to the branches. 🌳</div><div class="source">Nigerian Proverb</div>`,
+        `<div class="proverb">🔄 If you want to know the end, look at the beginning. 🔄</div><div class="source">Japanese Proverb</div>`,
+        `<div class="proverb">🌱 The grass is always greener on the other side of the fence. 🌱</div><div class="source">American Proverb</div>`,
+        `<div class="proverb">🧠 A well-fed mind is a better weapon than a well-fed stomach. 🧠</div><div class="source">Indian Proverb</div>`,
+        `<div class="proverb">🍇 Patience is a bitter plant, but it has sweet fruit. 🍇</div><div class="source">German Proverb</div>`,
+        `<div class="proverb">🪴 Do not look where you fell, but where you slipped. 🪴</div><div class="source">African Proverb</div>`,
+        `<div class="proverb">🐱 Rats don’t play in the cat’s door. 🐱</div><div class="source">Ghanaian Proverb</div>`,
+        `<div class="proverb">🦁 When the lion is not there, the antelope dances. 🦌</div><div class="source">Zulu Proverb</div>`,
+        `<div class="proverb">🧣 A single bracelet does not jingle. 🧣</div><div class="source">Congolese Proverb</div>`,
+        `<div class="proverb">🌾 You learn how to cut the grass by cutting it. 🌾</div><div class="source">Tanzanian Proverb</div>`,
+        `<div class="proverb">🧭 He who has a why to live can bear almost any how. 🧭</div><div class="source">German Proverb</div>`,
+        `<div class="proverb">🥚 Don’t put all your eggs in one basket. 🥚</div><div class="source">Spanish Proverb</div>`,
+        `<div class="proverb">🌕 The moon does not fight. It imposes itself. 🌕</div><div class="source">Chinese Proverb</div>`,
+        `<div class="proverb">⚖️ An ounce of prevention is worth a pound of cure. ⚖️</div><div class="source">American Proverb</div>`,
+        `<div class="proverb">🐺 When the wolf is hungry, he doesn't care about the sheep’s religion. 🐑</div><div class="source">Arab Proverb</div>`,
+        `<div class="proverb">⏳ If you wish to be rich, do not save money, but save time. ⏳</div><div class="source">Chinese Proverb</div>`,
+        `<div class="proverb">🌲 You cannot hide a large tree under a small shrub. 🌿</div><div class="source">Indian Proverb</div>`,
+        `<div class="proverb">💔 A broken heart is like a broken mirror. 💔</div><div class="source">Russian Proverb</div>`,
       ];
 
       function showRandomText() {
         const randomIndex = Math.floor(Math.random() * proverbsArray.length);
         const randomText = proverbsArray[randomIndex];
-        document.getElementById("randomText").textContent = randomText;
+        document.getElementById("randomText").innerHTML = randomText;
       }
 
-      setInterval(showRandomText, 9000);
+      setInterval(showRandomText, 7000);
       showRandomText();
     </script>
   </body>
