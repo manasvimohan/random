@@ -18,6 +18,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         height: 100vh;
         margin: 0;
         background-color: black;
@@ -50,6 +51,25 @@
         font-size: 1rem;
         margin-top: 2rem;
       }
+      .buttonsPlaceholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        position: fixed;
+        top: 1rem;
+      }
+      .button {
+        padding: 0.2rem;
+        border: 0.01rem solid white;
+        animation-duration: 2px;
+        transition: 1s;
+        cursor: pointer;
+      }
+      .button:hover {
+        scale: 1.2;
+      }
+
       @keyframes gradient-animation {
         0% {
           background-position: 0% 50%;
@@ -74,11 +94,65 @@
           font-size: 55px; /* Adjust font size */
         }
       }
+      .active {
+        border: 0.01rem solid rgb(216, 108, 41);
+        color: rgb(216, 108, 41);
+      }
     </style>
   </head>
   <body>
+    <div class="buttonsPlaceholder">
+      <div id="prov" class="button active" onclick="showProverbs()">
+        Proverbs
+      </div>
+      <div id="aff" class="button" onclick="showAffirmations()">
+        Affirmations
+      </div>
+    </div>
     <div id="randomText"></div>
     <script>
+      const affirmations = [
+        `<div class="proverb">💰 I am worthy of financial abundance and success. 💰</div><div class="source">Wealth Affirmation</div>`,
+        `<div class="proverb">💪 My body is healthy, and I am filled with energy. 💪</div><div class="source">Health Affirmation</div>`,
+        `<div class="proverb">🍀 Luck flows to me effortlessly and continuously. 🍀</div><div class="source">Luck Affirmation</div>`,
+        `<div class="proverb">💸 Money comes to me in expected and unexpected ways. 💸</div><div class="source">Wealth Affirmation</div>`,
+        `<div class="proverb">🧘 I prioritize my well-being and make choices that support my health. 🧘</div><div class="source">Health Affirmation</div>`,
+        `<div class="proverb">🍀 I attract good fortune and prosperity with every step I take. 🍀</div><div class="source">Luck Affirmation</div>`,
+        `<div class="proverb">💰 Abundance is my natural state, and I welcome wealth into my life. 💰</div><div class="source">Wealth Affirmation</div>`,
+        `<div class="proverb">💖 I love and respect my body, nourishing it with healthy food and thoughts. 💖</div><div class="source">Health Affirmation</div>`,
+        `<div class="proverb">🌟 I am a magnet for positive opportunities and fortunate events. 🌟</div><div class="source">Luck Affirmation</div>`,
+        `<div class="proverb">💸 I am a savvy investor, and my financial wisdom grows every day. 💸</div><div class="source">Wealth Affirmation</div>`,
+        `<div class="proverb">🌿 Every cell in my body radiates vitality and health. 🌿</div><div class="source">Health Affirmation</div>`,
+        `<div class="proverb">🍀 I am open to receiving all the blessings and good fortune that life has to offer. 🍀</div><div class="source">Luck Affirmation</div>`,
+        `<div class="proverb">💰 I attract opportunities that lead to wealth and prosperity. 💰</div><div class="source">Wealth Affirmation</div>`,
+        `<div class="proverb">🧘‍♀️ I honor my body with proper rest, exercise, and mindful practices. 🧘‍♀️</div><div class="source">Health Affirmation</div>`,
+        `<div class="proverb">🌟 My life is full of abundance and good luck at every turn. 🌟</div><div class="source">Luck Affirmation</div>`,
+        `<div class="proverb">💸 I am constantly attracting financial abundance into my life. 💸</div><div class="source">Wealth Affirmation</div>`,
+        `<div class="proverb">💚 I am strong, healthy, and my body is a reflection of my positive thoughts. 💚</div><div class="source">Health Affirmation</div>`,
+        `<div class="proverb">🍀 I am always in the right place at the right time, attracting luck and opportunities. 🍀</div><div class="source">Luck Affirmation</div>`,
+        `<div class="proverb">💰 My financial future is bright, and I create wealth with ease. 💰</div><div class="source">Wealth Affirmation</div>`,
+        `<div class="proverb">💪 Every day, I feel stronger and healthier in my mind and body. 💪</div><div class="source">Health Affirmation</div>`,
+        `<div class="proverb">🌟 I radiate positivity, and luck flows effortlessly toward me. 🌟</div><div class="source">Luck Affirmation</div>`,
+        `<div class="proverb">🌟 I am the operant power in my life, and I create my reality through my thoughts. 🌟</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">💰 Wealth is my divine right, and I claim it now. 💰</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">🌿 I am now in perfect health, and I radiate vitality and strength. 🌿</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">🍀 My thoughts are creative, and I imagine myself living in abundance and prosperity. 🍀</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">🌟 I am one with the infinite source of all good, and I am worthy of its blessings. 🌟</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">💫 I accept that all good things are already mine. I believe in the divine flow of prosperity. 💫</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">💪 I visualize myself in perfect health, and my body responds with vitality and energy. 💪</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">🍀 I trust the law of attraction, and I allow good fortune to flow freely into my life. 🍀</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">💰 I am in divine order and am receiving limitless opportunities for wealth and abundance. 💰</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">🌱 I am thankful for the health that is now manifesting in my body and mind. 🌱</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">💫 I vividly imagine myself successful, and I attract success with every thought. 💫</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">💖 I am now free from all limiting beliefs, and I claim my health, wealth, and happiness. 💖</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">💸 My subconscious mind is programmed for abundance, and wealth flows to me effortlessly. 💸</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">🍀 I give thanks for the endless supply of good fortune, and it multiplies each day. 🍀</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">💪 I am the picture of perfect health, and my body is a reflection of my vibrant energy. 💪</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">🌟 Every thought I think and every word I speak brings me closer to my ideal reality. 🌟</div><div class="source">Neville Goddard</div>`,
+        `<div class="proverb">💰 I affirm my prosperity daily and believe that money flows easily into my life. 💰</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">🌱 I now choose to believe that perfect health and wellness are mine. 🌱</div><div class="source">Florence Scovel Shinn</div>`,
+        `<div class="proverb">🍀 All things are working together for my good, and luck follows me wherever I go. 🍀</div><div class="source">Neville Goddard</div>`,
+      ];
       const proverbsArray = [
         `<div class="proverb">🌳 A tree is known by its fruit. 🌳</div><div class="source">Southern African Proverb</div>`,
         `<div class="proverb">🐎 The old horse in the stable still yearns to run. 🐎</div><div class="source">Asian Proverb</div>`,
@@ -198,14 +272,28 @@
         `<div class="proverb">🌍 Don't cry because it's over, smile because it happened. 🌍</div><div class="source">Dr. Seuss</div>`,
       ];
 
-      function showRandomText() {
-        const randomIndex = Math.floor(Math.random() * proverbsArray.length);
-        const randomText = proverbsArray[randomIndex];
+      function showRandomText(arraytoshow) {
+        const randomIndex = Math.floor(
+          Math.random() * window.arraytoshow.length
+        );
+        const randomText = window.arraytoshow[randomIndex];
         document.getElementById("randomText").innerHTML = randomText;
       }
 
-      setInterval(showRandomText, 7000);
-      showRandomText();
+      function showProverbs() {
+        window.arraytoshow = proverbsArray;
+        document.getElementById("aff").classList.remove("active");
+        document.getElementById("prov").classList.add("active");
+      }
+      function showAffirmations() {
+        window.arraytoshow = affirmations;
+        document.getElementById("prov").classList.remove("active");
+        document.getElementById("aff").classList.add("active");
+      }
+
+      setInterval(showRandomText, 9000);
+      window.arraytoshow = proverbsArray;
+      showRandomText(window.arraytoshow);
     </script>
   </body>
 </html>
