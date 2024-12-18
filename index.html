@@ -17,7 +17,7 @@
         align-items: center;
         height: 100vh;
         margin: 0;
-        background-color: #f4f4f9;
+        background-color: black;
         color: #333;
         padding: 0 5rem 0 5rem;
         overflow-y: hidden;
@@ -26,7 +26,8 @@
         font-style: normal;
       }
       #randomText {
-        font-size: 3rem;
+        font-size: 2rem;
+        color: white;
       }
     </style>
   </head>
@@ -81,7 +82,7 @@
         document.getElementById("randomText").textContent = randomText;
       }
 
-      setInterval(showRandomText, 4000);
+      setInterval(showRandomText, 9000);
       showRandomText();
     </script>
   </body>
