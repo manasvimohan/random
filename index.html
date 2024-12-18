@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Text Display</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Overpass+Mono:wght@300..700&family=Playwrite+CO+Guides&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f9;
+        color: #333;
+        padding: 0 5rem 0 5rem;
+        overflow-y: hidden;
+        font-family: "Tomorrow", sans-serif;
+        font-weight: 200;
+        font-style: normal;
+      }
+      #randomText {
+        font-size: 5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="randomText">Welcome!</div>
+    <script>
+      const proverbsArray = [
+        "Wisdom is like a baobab tree; no one individual can embrace it. 🌳 - African Proverb",
+        "The early bird catches the worm. 🐦 - English Proverb",
+        "A journey of a thousand miles begins with a single step. 👣 - Chinese Proverb",
+        "He who has health has hope, and he who has hope has everything. 💪 - Arabian Proverb",
+        "Better to light a candle than to curse the darkness. 🕯️ - Chinese Proverb",
+        "Don’t count your chickens before they hatch. 🐣 - English Proverb",
+        "The child who is not embraced by the village will burn it down to feel its warmth. 🔥 - African Proverb",
+        "If you want to go fast, go alone. If you want to go far, go together. 🤝 - African Proverb",
+        "A man who uses force is afraid of reasoning. 💥 - Kenyan Proverb",
+        "The one who asks questions doesn’t lose their way. ❓ - Native American Proverb",
+
+        "A bird does not change its feathers because the weather is bad. 🦅 - Jamaican Proverb",
+        "He who doesn’t know one thing knows another. 🤷‍♂️ - Spanish Proverb",
+        "A friend in need is a friend indeed. 👯‍♂️ - English Proverb",
+        "Don't let the sun go down on your anger. 🌅 - Hebrew Proverb",
+        "When there is no enemy within, the enemies outside cannot hurt you. 🛡️ - African Proverb",
+        "In the land of the blind, the one-eyed man is king. 👑 - Latin Proverb",
+        "A fool looks for happiness in the distance; the wise grows it under his feet. 🌱 - Chinese Proverb",
+        "To understand the heart and mind of a person, look not at what they have already achieved, but at what they aspire to. 🎯 - Nigerian Proverb",
+        "When the roots of a tree begin to decay, it spreads death to the branches. 🌳 - Nigerian Proverb",
+        "If you want to know the end, look at the beginning. 🔄 - Japanese Proverb",
+
+        "The grass is always greener on the other side of the fence. 🌱 - American Proverb",
+        "A well-fed mind is a better weapon than a well-fed stomach. 🧠 - Indian Proverb",
+        "Patience is a bitter plant, but it has sweet fruit. 🍇 - German Proverb",
+        "Do not look where you fell, but where you slipped. 🪴 - African Proverb",
+        "Rats don’t play in the cat’s door. 🐱 - Ghanaian Proverb",
+        "When the lion is not there, the antelope dances. 🦁 - Zulu Proverb",
+        "A single bracelet does not jingle. 🧣 - Congolese Proverb",
+        "You learn how to cut the grass by cutting it. 🌾 - Tanzanian Proverb",
+        "He who has a why to live can bear almost any how. 🧭 - German Proverb",
+        "Don’t put all your eggs in one basket. 🥚 - Spanish Proverb",
+
+        "The moon does not fight. It imposes itself. 🌕 - Chinese Proverb",
+        "An ounce of prevention is worth a pound of cure. ⚖️ - American Proverb",
+        "When the wolf is hungry, he doesn't care about the sheep’s religion. 🐺 - Arab Proverb",
+        "If you wish to be rich, do not save money, but save time. ⏳ - Chinese Proverb",
+        "You cannot hide a large tree under a small shrub. 🌲 - Indian Proverb",
+        "A broken heart is like a broken mirror. 💔 - Russian Proverb",
+      ];
+
+      function showRandomText() {
+        const randomIndex = Math.floor(Math.random() * proverbsArray.length);
+        const randomText = proverbsArray[randomIndex];
+        document.getElementById("randomText").textContent = randomText;
+      }
+
+      setInterval(showRandomText, 4000);
+      showRandomText();
+    </script>
+  </body>
+</html>
