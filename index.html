@@ -64,11 +64,11 @@
         padding: 0.2rem;
         border: 0.01rem solid white;
         animation-duration: 2px;
-        transition: 1s;
+        transition: 0.3s;
         cursor: pointer;
       }
       .button:hover {
-        scale: 1.2;
+        scale: 1.1;
       }
 
       @keyframes gradient-animation {
@@ -110,15 +110,18 @@
   </head>
   <body>
     <div class="buttonsPlaceholder">
-      <div id="prov" class="button active" onclick="showProverbs()">
-        Proverbs
-      </div>
+      <div id="prov" class="button" onclick="showProverbs()">Proverbs</div>
       <div id="aff" class="button" onclick="showAffirmations()">
         Affirmations
       </div>
+      <div id="foc" class="button active" onclick="showFocus()">Focus</div>
     </div>
     <div id="randomText"></div>
+
     <script>
+      const focusArray = [
+        `<div class="proverb">Amazon KDP</div><div class="source">Focus</div>`,
+      ];
       const affirmations = [
         `<div class="proverb">💰 I am worthy of financial abundance and success. 💰</div><div class="source">Wealth Affirmation</div>`,
         `<div class="proverb">💪 My body is healthy, and I am filled with energy. 💪</div><div class="source">Health Affirmation</div>`,
@@ -280,17 +283,28 @@
 
       function showProverbs() {
         window.arraytoshow = proverbsArray;
+        showRandomText(window.arraytoshow);
         document.getElementById("aff").classList.remove("active");
+        document.getElementById("foc").classList.remove("active");
         document.getElementById("prov").classList.add("active");
       }
       function showAffirmations() {
         window.arraytoshow = affirmations;
+        showRandomText(window.arraytoshow);
         document.getElementById("prov").classList.remove("active");
+        document.getElementById("foc").classList.remove("active");
         document.getElementById("aff").classList.add("active");
+      }
+      function showFocus() {
+        window.arraytoshow = focusArray;
+        showRandomText(window.arraytoshow);
+        document.getElementById("prov").classList.remove("active");
+        document.getElementById("aff").classList.remove("active");
+        document.getElementById("foc").classList.add("active");
       }
 
       setInterval(showRandomText, 11000);
-      window.arraytoshow = proverbsArray;
+      window.arraytoshow = focusArray;
       showRandomText(window.arraytoshow);
     </script>
   </body>
